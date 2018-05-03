@@ -3,8 +3,6 @@ package io.alekseimartoyas.webgallery.DataLayer.Entity
 import android.os.Parcelable
 import android.os.Parcel
 
-
-
 class WebPhoto(url: String, title: String): Parcelable {
     private var mUrl: String? = url
     private var mTitle: String? = title
@@ -12,7 +10,17 @@ class WebPhoto(url: String, title: String): Parcelable {
     protected constructor(input: Parcel) : this(input.readString(), input.readString())
 
 
-    val CREATOR: Parcelable.Creator<WebPhoto> = object : Parcelable.Creator<WebPhoto> {
+//    val CREATOR: Parcelable.Creator<WebPhoto> = object : Parcelable.Creator<WebPhoto> {
+//        override fun createFromParcel(`in`: Parcel): WebPhoto {
+//            return WebPhoto(`in`)
+//        }
+//
+//        override fun newArray(size: Int): Array<WebPhoto?> {
+//            return arrayOfNulls(size)
+//        }
+//    }
+
+    companion object CREATOR : Parcelable.Creator<WebPhoto> {
         override fun createFromParcel(`in`: Parcel): WebPhoto {
             return WebPhoto(`in`)
         }

@@ -3,7 +3,6 @@ package io.alekseimartoyas.webgallery.Modules.PicturesShowing.view
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import io.alekseimartoyas.webgallery.DataLayer.Entity.WebPhoto
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter.WebImageGalleryAdapter
 import io.alekseimartoyas.webgallery.R
