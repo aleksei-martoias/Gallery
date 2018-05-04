@@ -29,14 +29,8 @@ class WebImageGalleryAdapter(context: Context, photos: Array<WebPhoto>): Recycle
         return MyViewHolder(photoView)
     }
 
-//    override fun onBindViewHolder(holder: WebImageGalleryAdapter.MyViewHolder, position: Int) {
-//
-//        val spacePhoto = mSpacePhotos!![position]
-//        val imageView = holder.mPhotoImageView
-//    }
-
     override fun getItemCount(): Int {
-        return mSpacePhotos!!.size
+        return mSpacePhotos.size
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -52,7 +46,7 @@ class WebImageGalleryAdapter(context: Context, photos: Array<WebPhoto>): Recycle
 
             val position = getAdapterPosition()
             if (position != RecyclerView.NO_POSITION) {
-                val spacePhoto = mSpacePhotos!![position]
+                val spacePhoto = mSpacePhotos[position]
                 val intent = Intent(mContext, PictureDetailedActivity::class.java)
                 intent.putExtra("photo", spacePhoto)
                 mContext.startActivity(intent)
@@ -61,7 +55,7 @@ class WebImageGalleryAdapter(context: Context, photos: Array<WebPhoto>): Recycle
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val spacePhoto = mSpacePhotos!!.get(position)
+        val spacePhoto = mSpacePhotos[position]
         val imageView = holder.mPhotoImageView
 
         Glide.with(mContext)
