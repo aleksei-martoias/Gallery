@@ -6,19 +6,11 @@ import android.os.Parcel
 class WebPhoto(url: String, title: String): Parcelable {
     private var mUrl: String? = url
     private var mTitle: String? = title
+    private var publishedAt: String? = null
+    private var description: String? = null
+    private var publishedBy: String? = null
 
-    protected constructor(input: Parcel) : this(input.readString(), input.readString())
-
-
-//    val CREATOR: Parcelable.Creator<WebPhoto> = object : Parcelable.Creator<WebPhoto> {
-//        override fun createFromParcel(`in`: Parcel): WebPhoto {
-//            return WebPhoto(`in`)
-//        }
-//
-//        override fun newArray(size: Int): Array<WebPhoto?> {
-//            return arrayOfNulls(size)
-//        }
-//    }
+    constructor(input: Parcel) : this(input.readString(), input.readString())
 
     companion object CREATOR : Parcelable.Creator<WebPhoto> {
         override fun createFromParcel(`in`: Parcel): WebPhoto {

@@ -17,9 +17,13 @@ import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAd
 
 
 
-class WebImageGalleryAdapter(context: Context, photos: Array<WebPhoto>): RecyclerView.Adapter<WebImageGalleryAdapter.MyViewHolder>() {
-    private var mSpacePhotos: Array<WebPhoto> = photos
+class WebImageGalleryAdapter(context: Context):
+        RecyclerView.Adapter<WebImageGalleryAdapter.MyViewHolder>(),
+        WebImageGalleryAdapterInput {
+
+    private var mSpacePhotos: Array<WebPhoto>? = null
     private var mContext = context
+    var presenter: WebImageGalleryAdapterOutput? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WebImageGalleryAdapter.MyViewHolder {
 
@@ -30,7 +34,7 @@ class WebImageGalleryAdapter(context: Context, photos: Array<WebPhoto>): Recycle
     }
 
     override fun getItemCount(): Int {
-        return mSpacePhotos.size
+        return mSpacePhotos?.size ?: 0
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -46,7 +50,7 @@ class WebImageGalleryAdapter(context: Context, photos: Array<WebPhoto>): Recycle
 
             val position = getAdapterPosition()
             if (position != RecyclerView.NO_POSITION) {
-                val spacePhoto = mSpacePhotos[position]
+                val spacePhoto = mSpacePhotos?.get(position)
                 val intent = Intent(mContext, PictureDetailedActivity::class.java)
                 intent.putExtra("photo", spacePhoto)
                 mContext.startActivity(intent)
@@ -55,12 +59,12 @@ class WebImageGalleryAdapter(context: Context, photos: Array<WebPhoto>): Recycle
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val spacePhoto = mSpacePhotos[position]
+        val spacePhoto = mSpacePhotos?.get(position)
         val imageView = holder.mPhotoImageView
 
-        Glide.with(mContext)
-                .load(spacePhoto.getUrl())
-//                .placeholder(R.drawable.ic_cloud_off_red)
-                .into(imageView)
+//        Glide.with(mContext)
+//                .load(spacePhoto?.getUrl())
+////                .placeholder(R.drawable.ic_cloud_off_red)
+//                .into(imageView)
     }
 }

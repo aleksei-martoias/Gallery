@@ -6,12 +6,14 @@ import io.alekseimartoyas.webgallery.Modules.PicturesShowing.interactor.Pictures
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.router.PicturesShowingRouterInput
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.PicturesShowingActivityInput
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.PicturesShowingActivityOutput
+import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter.WebImageGalleryAdapterOutput
 
 class PicturesShowingPresenter: BasePresenter<PicturesShowingActivityInput,
         PicturesShowingInteractorInput,
         PicturesShowingRouterInput>(),
         PicturesShowingActivityOutput,
-        PicturesShowingInteractorOutput {
+        PicturesShowingInteractorOutput,
+        WebImageGalleryAdapterOutput {
 
     override var interactor: PicturesShowingInteractorInput? = null
     override var activity: PicturesShowingActivityInput? = null
