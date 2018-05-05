@@ -1,7 +1,6 @@
 package io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter
 
 import android.content.Context
-import android.support.v4.content.ContextCompat.startActivity
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,22 +10,22 @@ import android.widget.ImageView
 import io.alekseimartoyas.webgallery.DataLayer.Entity.WebPhoto
 import io.alekseimartoyas.webgallery.Modules.PictureDetailed.view.PictureDetailedActivity
 import io.alekseimartoyas.webgallery.R
-import com.bumptech.glide.Glide
-import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter.WebImageGalleryAdapter.MyViewHolder
-
-
-
 
 class WebImageGalleryAdapter(context: Context):
         RecyclerView.Adapter<WebImageGalleryAdapter.MyViewHolder>(),
         WebImageGalleryAdapterInput {
 
-    private var mSpacePhotos: Array<WebPhoto>? = null
-    private var mContext = context
+    private var photos: MutableList<WebPhoto>? = mutableListOf()
+    private var mContext: Context? = context
     var presenter: WebImageGalleryAdapterOutput? = null
+    private var currentPage = 1
+
+    override fun addPhotosUrls(data: MutableList<WebPhoto>) {
+        photos?.addAll(data)
+        this.notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WebImageGalleryAdapter.MyViewHolder {
-
         val context = parent.context
         val inflater = LayoutInflater.from(context)
         val photoView = inflater.inflate(R.layout.item_image_card, parent, false)
@@ -34,7 +33,7 @@ class WebImageGalleryAdapter(context: Context):
     }
 
     override fun getItemCount(): Int {
-        return mSpacePhotos?.size ?: 0
+        return photos?.size ?: 0
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -50,21 +49,26 @@ class WebImageGalleryAdapter(context: Context):
 
             val position = getAdapterPosition()
             if (position != RecyclerView.NO_POSITION) {
-                val spacePhoto = mSpacePhotos?.get(position)
+                val spacePhoto = photos?.get(position)
                 val intent = Intent(mContext, PictureDetailedActivity::class.java)
                 intent.putExtra("photo", spacePhoto)
-                mContext.startActivity(intent)
+                mContext?.startActivity(intent)
             }
         }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val spacePhoto = mSpacePhotos?.get(position)
+        val spacePhoto = photos?.get(position)
         val imageView = holder.mPhotoImageView
 
+        presenter?.getImage(mContext!!, imageView, spacePhoto?.getUrl() ?: "")
 //        Glide.with(mContext)
 //                .load(spacePhoto?.getUrl())
 ////                .placeholder(R.drawable.ic_cloud_off_red)
 //                .into(imageView)
+    }
+
+    override fun destructor() {
+        mContext = null
     }
 }

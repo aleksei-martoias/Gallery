@@ -23,6 +23,7 @@ class PicturesShowingConfigurator(private var context: PicturesShowingActivity?)
         presenter.activity = context
         presenter.interactor = interactor
         presenter.router = router
+        presenter.adapter = adapter
 
 
 
