@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">WebGallery</string>
     <string name="network_error">Сетевая ошибка</string>
+    <string name="created_by">Создано пользователем</string>
+    <string name="created_at">Дата создания</string>
+    <string name="size">Размер (ширина x высота)</string>
+    <string name="dataFrom">Данны получены через API Unsplash</string>
 </resources>

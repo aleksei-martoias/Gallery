@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">WebGallery</string>
     <string name="network_error">Network error</string>
+    <string name="created_by">By user</string>
+    <string name="created_at">Created at</string>
+    <string name="size">Size (width x height)</string>
+    <string name="dataFrom">Data from Unsplash</string>
 </resources>

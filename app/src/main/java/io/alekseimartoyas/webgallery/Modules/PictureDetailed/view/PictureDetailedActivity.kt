@@ -1,6 +1,8 @@
 package io.alekseimartoyas.webgallery.Modules.PictureDetailed.view
 
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Parcel
 import android.view.MenuItem
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -26,10 +28,19 @@ class PictureDetailedActivity : BaseActivity<PictureDetailedActivityOutput>(),
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initViews()
+        showPhoto(intent.getParcelableExtra("photo"))
+    }
 
-        val webPhoto = intent.getParcelableExtra<WebPhoto>("photo")
-        if (imageView != null && webPhoto.getUrl() != null)
-            presenter?.getPicture(this, imageView!!, webPhoto.getUrl()!!)
+    private fun showPhoto(photo: WebPhoto) {
+        if (imageView != null && photo.getUrl() != null)
+            presenter?.getPicture(this, imageView!!, photo.getUrl()!!)
+
+        if (photo.getProfileUrl() != null)
+            presenter?.getPicture(this, profileImage, photo.getProfileUrl()!!)
+
+        createdBy.text = photo.getPublishedBy()
+        createdAt.text = photo.getPublishedAt()?.slice(0..9)
+        sizes.text = photo.getSize()
     }
 
     private fun initViews() {

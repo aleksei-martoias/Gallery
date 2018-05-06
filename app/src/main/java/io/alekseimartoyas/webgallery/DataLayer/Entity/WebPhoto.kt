@@ -12,7 +12,9 @@ class WebPhoto(private var url: String? = null,
                private var color: String? = null,
                private var profileUrl: String? = null): Parcelable { // profile photo
 
-    constructor(input: Parcel) : this(input.readString(), input.readString())
+    constructor(input: Parcel) : this(input.readString(), input.readString(),
+            input.readString(), input.readString(),
+            input.readString(), null, null, input.readString())
 
     companion object CREATOR : Parcelable.Creator<WebPhoto> {
         override fun createFromParcel(`in`: Parcel): WebPhoto {
@@ -24,17 +26,23 @@ class WebPhoto(private var url: String? = null,
         }
     }
 
-    fun getUrl() : String? {
-        return url
-    }
+    fun getProfileUrl(): String? = profileUrl
+
+    fun getPublishedBy(): String? = publishedBy
+
+    fun getSize(): String? = size
+
+    fun getPublishedAt(): String? = publishedAt
+
+    fun getUrl() : String? = url
 
     fun setUrl(url: String) {
         this.url = url
     }
 
-    fun getTitle(): String? {
-        return title
-    }
+    fun getTitle(): String? = title
+
+    fun getColor(): String = color ?: "#FFFFFF"
 
     fun setTitle(title: String) {
         this.title = title
@@ -45,5 +53,9 @@ class WebPhoto(private var url: String? = null,
     override fun writeToParcel(p0: Parcel?, p1: Int) {
         p0?.writeString(url)
         p0?.writeString(title)
+        p0?.writeString(publishedAt)
+        p0?.writeString(size)
+        p0?.writeString(publishedBy)
+        p0?.writeString(profileUrl)
     }
 }

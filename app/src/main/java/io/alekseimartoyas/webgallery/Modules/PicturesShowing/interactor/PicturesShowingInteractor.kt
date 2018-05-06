@@ -21,7 +21,7 @@ class PicturesShowingInteractor: BaseInteractor<PicturesShowingInteractorOutput>
     }
 
     override fun getImage(context: Context, imageView: ImageView, url: String) {
-        glide?.getPhoto(context, imageView, url)
+        glide?.getPhotoCrop(context, imageView, url)
     }
 
     override fun destructor() {

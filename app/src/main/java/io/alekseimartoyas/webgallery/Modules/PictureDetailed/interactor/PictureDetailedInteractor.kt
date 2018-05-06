@@ -12,7 +12,7 @@ class PictureDetailedInteractor: BaseInteractor<PictureDetailedInteractorOutput>
     var glide: GlideServiceInput? = null
 
     override fun getPicture(context: Context, imageView: ImageView, url: String) {
-        glide?.getPhoto(context, imageView, url)
+        glide?.getPhotoDetailed(context, imageView, url)
     }
 
     override fun destructor() {

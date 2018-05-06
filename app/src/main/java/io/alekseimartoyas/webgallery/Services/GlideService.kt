@@ -1,23 +1,33 @@
 package io.alekseimartoyas.webgallery.Services
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import io.alekseimartoyas.webgallery.R
 
+
 interface GlideServiceInput {
-    fun getPhoto(context: Context, imageView: ImageView, url: String)
+    fun getPhotoDetailed(context: Context, imageView: ImageView, url: String)
+    fun getPhotoCrop(context: Context, imageView: ImageView, url: String)
 }
 
 class GlideService : GlideServiceInput {
-    override fun getPhoto(context: Context, imageView: ImageView, url: String) {
+    override fun getPhotoCrop(context: Context, imageView: ImageView, url: String) {
         Glide.with(context)
                 .load(url)
-                .error(R.drawable.abc_ic_clear_material)
-//                .asBitmap()
-                .placeholder(R.drawable.abc_ic_clear_material)
+                .error(R.drawable.ic_error_grey_24dp)
+                .placeholder(R.drawable.ic_cloud_download_grey_24dp)
+                .centerCrop()
                 .into(imageView)
-//                .onLoadFailed(error("Error"), Drawable.)
+    }
+
+    override fun getPhotoDetailed(context: Context, imageView: ImageView, url: String) {
+        Glide.with(context)
+                .load(url)
+                .error(R.drawable.ic_error_grey_24dp)
+//                .asBitmap()
+                .placeholder(R.drawable.ic_cloud_download_grey_24dp)
+                .fitCenter()
+                .into(imageView)
     }
 }
