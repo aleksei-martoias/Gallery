@@ -24,7 +24,7 @@ class PicturesShowingActivity : BaseActivity<PicturesShowingActivityOutput>(),
 
         PicturesShowingConfigurator(this).buildModule()
 
-        val recyclerView = rv_images
+        val recyclerView = recyclerview_images
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager!!
         recyclerView.addOnScrollListener(paginationListener)

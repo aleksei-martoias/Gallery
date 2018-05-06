@@ -11,12 +11,11 @@ import io.alekseimartoyas.webgallery.DataLayer.Entity.WebPhoto
 import io.alekseimartoyas.webgallery.Modules.PictureDetailed.view.PictureDetailedActivity
 import io.alekseimartoyas.webgallery.R
 
-class WebImageGalleryAdapter(context: Context):
+class WebImageGalleryAdapter(private var context: Context? = null):
         RecyclerView.Adapter<WebImageGalleryAdapter.MyViewHolder>(),
         WebImageGalleryAdapterInput {
 
     private var photos: MutableList<WebPhoto>? = mutableListOf()
-    private var mContext: Context? = context
     var presenter: WebImageGalleryAdapterOutput? = null
 
     override fun addPhotosUrls(data: MutableList<WebPhoto>) {
@@ -45,7 +44,7 @@ class WebImageGalleryAdapter(context: Context):
         var mPhotoImageView: ImageView
 
         init {
-            mPhotoImageView = itemView.findViewById(R.id.iv_photo) as ImageView
+            mPhotoImageView = itemView.findViewById(R.id.imageview_photo) as ImageView
             itemView.setOnClickListener(this)
         }
 
@@ -53,10 +52,12 @@ class WebImageGalleryAdapter(context: Context):
 
             val position = getAdapterPosition()
             if (position != RecyclerView.NO_POSITION) {
-                val spacePhoto = photos?.get(position)
-                val intent = Intent(mContext, PictureDetailedActivity::class.java)
-                intent.putExtra("photo", spacePhoto)
-                mContext?.startActivity(intent)
+                if (context != null)
+                    presenter?.showDetailed(photos?.get(position), context!!)
+//                val spacePhoto = photos?.get(position)
+//                val intent = Intent(mContext, PictureDetailedActivity::class.java)
+//                intent.putExtra("photo", spacePhoto)
+//                mContext?.startActivity(intent)
             }
         }
     }
@@ -65,14 +66,10 @@ class WebImageGalleryAdapter(context: Context):
         val spacePhoto = photos?.get(position)
         val imageView = holder.mPhotoImageView
 
-        presenter?.getImage(mContext!!, imageView, spacePhoto?.getUrl() ?: "")
-//        Glide.with(mContext)
-//                .load(spacePhoto?.getUrl())
-////                .placeholder(R.drawable.ic_cloud_off_red)
-//                .into(imageView)
+        presenter?.getImage(context!!, imageView, spacePhoto?.getUrl() ?: "")
     }
 
     override fun destructor() {
-        mContext = null
+        context = null
     }
 }

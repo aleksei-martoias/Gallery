@@ -29,6 +29,8 @@ class PictureDetailedActivity : BaseActivity<PictureDetailedActivityOutput>(),
 
         initViews()
         showPhoto(intent.getParcelableExtra("photo"))
+
+        supportActionBar?.title = getString(R.string.detailed_screen)
     }
 
     private fun showPhoto(photo: WebPhoto) {

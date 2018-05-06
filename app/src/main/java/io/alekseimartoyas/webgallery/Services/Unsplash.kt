@@ -38,12 +38,12 @@ class Unsplash(private val retrofitService: RetrofitManagerInputOutput?,
             parsedData.add(WebPhoto((photoList["urls"] as LinkedTreeMap<String, String>)["small"]!!,
                     "",
                     photoList["created_at"] as String,
-                    "${photoList["width"] as Double}x${photoList["height"] as Double}",
+                    "${(photoList["width"] as Double).toInt()}x${(photoList["height"] as Double).toInt()}",
                     (photoList["user"] as LinkedTreeMap<String, String>)["username"] as String,
                     photoList["id"] as String,
                     photoList["color"] as String,
                     ((photoList["user"] as LinkedTreeMap<String, String>)["profile_image"]!!
-                            as LinkedTreeMap <String, String>)["small"]!!))
+                            as LinkedTreeMap <String, String>)["medium"]!!))
         }
 
         return Observable.just(parsedData)

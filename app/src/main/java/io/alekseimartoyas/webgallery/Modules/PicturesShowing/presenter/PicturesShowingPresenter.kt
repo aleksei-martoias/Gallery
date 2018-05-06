@@ -48,6 +48,11 @@ class PicturesShowingPresenter: BasePresenter<PicturesShowingActivityInput,
         activity?.stopRefreshing()
     }
 
+    override fun showDetailed(photo: WebPhoto?, context: Context) {
+        if (photo != null)
+            router?.showDeatailed(photo, context)
+    }
+
     override fun errorToastShow(messageId: Int) {
         activity?.errorToastShow(messageId)
     }
