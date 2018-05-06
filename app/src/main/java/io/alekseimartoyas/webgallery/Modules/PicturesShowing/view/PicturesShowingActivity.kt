@@ -43,9 +43,12 @@ class PicturesShowingActivity : BaseActivity<PicturesShowingActivityOutput>(),
         refreshLayout?.isRefreshing = false
     }
 
-    override fun errorToastShow(messageId: Int) = Toast.makeText(this,
-            this.getText(messageId),
-            Toast.LENGTH_SHORT).show()
+    override fun errorToastShow(messageId: Int) {
+        Toast.makeText(this,
+                this.getText(messageId),
+                Toast.LENGTH_SHORT).show()
+        stopRefreshing()
+    }
 
     override fun destructor() {
         presenter?.destructor()
