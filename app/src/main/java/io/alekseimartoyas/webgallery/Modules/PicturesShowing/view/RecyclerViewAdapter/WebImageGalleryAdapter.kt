@@ -18,7 +18,6 @@ class WebImageGalleryAdapter(context: Context):
     private var photos: MutableList<WebPhoto>? = mutableListOf()
     private var mContext: Context? = context
     var presenter: WebImageGalleryAdapterOutput? = null
-    private var currentPage = 1
 
     override fun addPhotosUrls(data: MutableList<WebPhoto>) {
         photos?.addAll(data)

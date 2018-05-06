@@ -11,9 +11,9 @@ import io.alekseimartoyas.webgallery.Modules.PictureDetailed.configurator.Pictur
 import io.alekseimartoyas.webgallery.R
 import kotlinx.android.synthetic.main.activity_picture_detailed.*
 
-class PictureDetailedActivity : BaseActivity<PictureDetailedActivityO>(),
+class PictureDetailedActivity : BaseActivity<PictureDetailedActivityOutput>(),
         PictureDetailedActivityInput {
-    override var presenter: PictureDetailedActivityO? = null
+    override var presenter: PictureDetailedActivityOutput? = null
 
     private var imageView: ImageView? = null
 
@@ -52,9 +52,8 @@ class PictureDetailedActivity : BaseActivity<PictureDetailedActivityO>(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-        // Respond to the action bar's Up/Home button
             android.R.id.home -> {
-                onNavigateUp()
+                presenter?.showPicturesShowing(this)
                 return true
             }
         }

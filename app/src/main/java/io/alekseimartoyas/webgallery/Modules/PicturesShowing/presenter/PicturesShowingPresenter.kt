@@ -9,6 +9,8 @@ import io.alekseimartoyas.webgallery.Modules.PicturesShowing.interactor.Pictures
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.router.PicturesShowingRouterInput
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.PicturesShowingActivityInput
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.PicturesShowingActivityOutput
+import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter.PaginationOnScrollListenerInput
+import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter.PaginationOnScrollListenerOutput
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter.WebImageGalleryAdapterInput
 import io.alekseimartoyas.webgallery.Modules.PicturesShowing.view.RecyclerViewAdapter.WebImageGalleryAdapterOutput
 
@@ -17,13 +19,15 @@ class PicturesShowingPresenter: BasePresenter<PicturesShowingActivityInput,
         PicturesShowingRouterInput>(),
         PicturesShowingActivityOutput,
         PicturesShowingInteractorOutput,
-        WebImageGalleryAdapterOutput {
+        WebImageGalleryAdapterOutput,
+        PaginationOnScrollListenerOutput {
 
     override var interactor: PicturesShowingInteractorInput? = null
     override var activity: PicturesShowingActivityInput? = null
     override var router: PicturesShowingRouterInput? = null
 
     var adapter: WebImageGalleryAdapterInput? = null
+    var paginator: PaginationOnScrollListenerInput? = null
 
     override fun getImage(context: Context, imageView: ImageView, url: String)  {
         interactor?.getImage(context, imageView, url)
@@ -35,6 +39,7 @@ class PicturesShowingPresenter: BasePresenter<PicturesShowingActivityInput,
 
     override fun pushPhotoListToAdapter(data: MutableList<WebPhoto>) {
         adapter?.addPhotosUrls(data)
+        paginator?.finishLoading()
     }
 
     override fun destructor() {
@@ -42,7 +47,9 @@ class PicturesShowingPresenter: BasePresenter<PicturesShowingActivityInput,
         interactor?.destructor()
         interactor = null
         router = null
-        adapter?.destructor()
+//        adapter?.destructor()
         adapter = null
+        paginator?.destructor()
+        paginator = null
     }
 }

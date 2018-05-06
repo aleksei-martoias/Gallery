@@ -5,6 +5,4 @@ import android.widget.ImageView
 
 interface WebImageGalleryAdapterOutput {
     fun getImage(context: Context, imageView: ImageView, url: String)
-
-    fun getPhotoListAndPushToAdapter(page: Int, perPage: Int)
 }
