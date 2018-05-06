@@ -9,8 +9,9 @@ class PaginationOnScrollListener(private var layoutManager: GridLayoutManager?):
 
     var presenter: PaginationOnScrollListenerOutput? = null
     private var loading = false
-    private var page = 0
-    private var maxPage = 5
+    private var page = 1
+    private var maxPage = 50  // refactor
+    // get max page from api
 
     override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
@@ -20,14 +21,12 @@ class PaginationOnScrollListener(private var layoutManager: GridLayoutManager?):
 
         val count = recyclerView?.adapter?.itemCount ?: 1
         if (lastVisiblePosition == count - 1) {
-            1
             if (!loading && page < maxPage) {
                 loading = true
                 ++page
                 presenter?.getPhotoListAndPushToAdapter(page, 20)
             }
-        } else
-            1
+        }
     }
 
     override fun finishLoading() {

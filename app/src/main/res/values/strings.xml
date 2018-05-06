@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WebGallery</string>
+    <string name="network_error">Network error</string>
 </resources>

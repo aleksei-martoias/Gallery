@@ -37,9 +37,19 @@ class PicturesShowingPresenter: BasePresenter<PicturesShowingActivityInput,
         interactor?.getPhotoList(page, perPage)
     }
 
+    override fun reloadData(page: Int, perPage: Int) {
+        adapter?.deleteData()
+        interactor?.getPhotoList(page, 20)
+    }
+
     override fun pushPhotoListToAdapter(data: MutableList<WebPhoto>) {
         adapter?.addPhotosUrls(data)
         paginator?.finishLoading()
+        activity?.stopRefreshing()
+    }
+
+    override fun errorToastShow(messageId: Int) {
+        activity?.errorToastShow(messageId)
     }
 
     override fun destructor() {

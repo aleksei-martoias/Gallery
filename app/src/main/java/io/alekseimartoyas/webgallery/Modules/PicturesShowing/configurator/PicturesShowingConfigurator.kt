@@ -16,7 +16,7 @@ class PicturesShowingConfigurator(private var context: PicturesShowingActivity?)
         val interactor = PicturesShowingInteractor()
         val router = PicturesShowingRouter()
         val adapter =  WebImageGalleryAdapter(context!!)
-        val layoutManager = GridLayoutManager(context,2)
+        val layoutManager = GridLayoutManager(context,3)
         val paginator = PaginationOnScrollListener(layoutManager)
 
         context?.presenter = presenter

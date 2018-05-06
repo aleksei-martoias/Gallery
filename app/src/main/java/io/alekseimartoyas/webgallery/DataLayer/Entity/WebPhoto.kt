@@ -3,12 +3,14 @@ package io.alekseimartoyas.webgallery.DataLayer.Entity
 import android.os.Parcelable
 import android.os.Parcel
 
-class WebPhoto(url: String, title: String): Parcelable {
-    private var mUrl: String? = url
-    private var mTitle: String? = title
-    private var publishedAt: String? = null
-    private var description: String? = null
-    private var publishedBy: String? = null
+class WebPhoto(private var url: String? = null,
+               private var title: String? = null,
+               private var publishedAt: String? = null,
+               private var size: String? = null,
+               private var publishedBy: String? = null,
+               private var id: String? = null,
+               private var color: String? = null,
+               private var profileUrl: String? = null): Parcelable { // profile photo
 
     constructor(input: Parcel) : this(input.readString(), input.readString())
 
@@ -23,25 +25,25 @@ class WebPhoto(url: String, title: String): Parcelable {
     }
 
     fun getUrl() : String? {
-        return mUrl
+        return url
     }
 
     fun setUrl(url: String) {
-        mUrl = url
+        this.url = url
     }
 
     fun getTitle(): String? {
-        return mTitle
+        return title
     }
 
     fun setTitle(title: String) {
-        mTitle = title
+        this.title = title
     }
 
     override fun describeContents(): Int = 0
 
     override fun writeToParcel(p0: Parcel?, p1: Int) {
-        p0?.writeString(mUrl)
-        p0?.writeString(mTitle)
+        p0?.writeString(url)
+        p0?.writeString(title)
     }
 }

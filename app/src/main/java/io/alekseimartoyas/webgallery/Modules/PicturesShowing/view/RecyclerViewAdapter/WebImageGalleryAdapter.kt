@@ -24,6 +24,11 @@ class WebImageGalleryAdapter(context: Context):
         this.notifyDataSetChanged()
     }
 
+    override fun deleteData() {
+        photos = mutableListOf()
+        this.notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WebImageGalleryAdapter.MyViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)

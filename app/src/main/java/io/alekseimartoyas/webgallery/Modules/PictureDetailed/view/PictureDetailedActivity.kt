@@ -28,12 +28,8 @@ class PictureDetailedActivity : BaseActivity<PictureDetailedActivityOutput>(),
         initViews()
 
         val webPhoto = intent.getParcelableExtra<WebPhoto>("photo")
-
-        Glide.with(this)
-                .load(webPhoto.getUrl())
-                .asBitmap()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(imageView)
+        if (imageView != null && webPhoto.getUrl() != null)
+            presenter?.getPicture(this, imageView!!, webPhoto.getUrl()!!)
     }
 
     private fun initViews() {
@@ -43,6 +39,7 @@ class PictureDetailedActivity : BaseActivity<PictureDetailedActivityOutput>(),
     override fun destructor() {
         presenter?.destructor()
         presenter = null
+        imageView = null
     }
 
     override fun onDestroy() {
