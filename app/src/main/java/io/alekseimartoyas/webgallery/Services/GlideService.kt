@@ -25,7 +25,6 @@ class GlideService : GlideServiceInput {
         Glide.with(context)
                 .load(url)
                 .error(R.drawable.ic_error_grey_24dp)
-//                .asBitmap()
                 .placeholder(R.drawable.ic_cloud_download_grey_24dp)
                 .fitCenter()
                 .into(imageView)
